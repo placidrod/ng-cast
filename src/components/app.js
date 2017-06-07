@@ -1,11 +1,19 @@
-angular.module('video-player', [])
+angular.module('video-player')
+.controller('AppController', function (youTube){
+  this.searchService = youTube;
 
+  this.searchResults = (data) => {
+    this.videos = data;
+    this.currentVideo = this.videos[0];
+  };
+
+  this.selectVideo = (video) => {
+    this.currentVideo = video;
+  };
+
+  youTube.search('first search!', this.searchResults);
+})
 .component('app', {
-  // TODO
-
-  //template: 'test'
-  templateUrl: 'src/templates/app.html',
-  // controller: function() {
-
-  // }
+  controller: 'AppController',
+  templateUrl: 'src/templates/app.html'
 });
